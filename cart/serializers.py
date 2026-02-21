@@ -4,18 +4,18 @@ class ProductSerializer(serializers.ModelSerializer):
        image = serializers.ImageField(required=False)
        class Meta:
               model = Product
-              feilds =(
+              fields =(
                      "name",
                      "description",
                      "price",
                      "stock",
-                     "Image",
+                     "image",
               )
        def Validate_Price(self,value):
               if value < 0:
                      raise serializers.ValidationError("Price Must Be Greater Than 0")
               return value
-class OrderItemSerializer(serializers.ModelField):
+class OrderItemSerializer(serializers.ModelSerializer):
        product_name = serializers.CharField(source='product.name')
        product_price = serializers.DecimalField(max_digits=10,decimal_places=2,source='product.price')
        class Meta:
